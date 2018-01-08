@@ -4,6 +4,9 @@
   "main": "index.js",
   "author": "Ted Kulp <ted@tedkulp.com>",
   "license": "MIT",
+  "scripts": {
+    "start": "node index.js"
+  },
   "dependencies": {
     "bluebird": "^3.5.1",
     "cheerio": "^1.0.0-rc.2",
