@@ -17,6 +17,26 @@ services:
       - redis
     networks:
       - backend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    networks:
+      - frontend
+  haproxy:
+    build:
+      context: .
+      dockerfile: ./Dockerfile.haproxy
+    ports:
+      - "80:80"
+    depends_on:
+      - frontend
+      - notifier
+    networks:
+      - backend
+      - frontend
 networks:
   backend:
+    driver: bridge
+  frontend:
     driver: bridge

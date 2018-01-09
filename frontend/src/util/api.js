@@ -1,6 +1,7 @@
 import axios from 'axios'
 
-const API_URL = 'http://localhost:3002/api';
+//const API_URL = 'http://localhost:3002/api';
+const API_URL = '/api';
 
 const _performRequest = (method, url, params, auth, config = {}) => {
     const body = method === 'get' ? 'params' : 'data';
