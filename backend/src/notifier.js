@@ -6,13 +6,7 @@ const Promise = require('bluebird');
 const PushBullet = require('pushbullet');
 const pusher = new PushBullet(process.env.PUSHBULLET_API_KEY);
 
-let watchedGames = [];
-try {
-    watchedGames = _.filter(fs.readFileSync('./watchedgames').toString().split(os.EOL));
-} catch (err) {
-    console.error("Can't open watchedgames file");
-    process.exit(1);
-}
+const api = require('./api');
 
 const setNotificationAsSent = (redis, userId, gameId) => {
     const keyName = `sentnotifications:${userId}`;
@@ -30,13 +24,16 @@ const checkIfNotificationSent = (redis, userId, gameId) => {
 
 const checkForNotifications = (parsedData, redis, userId) => {
     const checkTime = moment().add(10, 'minutes');
-    const foundGames = _.filter(parsedData, game => _.includes(watchedGames, game.id));
-    _.forEach(foundGames, game => {
-        checkIfNotificationSent(redis, userId, game.id).then(wasNotified => {
-            if (!wasNotified && moment(game.startTime).isSameOrBefore(checkTime)) {
-                pusher.note({}, `${game.event} Notification`, `${game.title} by ${game.runners} is going to start at ${moment(game.startTime).format('h:mm a')}.`);
-                setNotificationAsSent(redis, userId, game.id);
-            }
+
+    api.listWatchedGames(redis, userId).then(watchedGames => {
+        const foundGames = _.filter(parsedData, game => _.includes(watchedGames, game.id));
+        _.forEach(foundGames, game => {
+            checkIfNotificationSent(redis, userId, game.id).then(wasNotified => {
+                if (!wasNotified && moment(game.startTime).isSameOrBefore(checkTime)) {
+                    pusher.note({}, `${game.event} Notification`, `${game.title} by ${game.runners} is going to start at ${moment(game.startTime).format('h:mm a')}.`);
+                    setNotificationAsSent(redis, userId, game.id);
+                }
+            });
         });
     });
 };

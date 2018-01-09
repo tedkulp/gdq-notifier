@@ -6,13 +6,13 @@ services:
       - backend
   notifier:
     build:
-      context: .
-      dockerfile: ./Dockerfile
+      context: ./backend
+      dockerfile: Dockerfile
     environment:
       DOCKER_REDIS_HOST: "redis"
       PUSHBULLET_API_KEY: "${PUSHBULLET_API_KEY}"
-    volumes:
-      - .:/myapp
+    # volumes:
+    #   - .:/myapp
     depends_on:
       - redis
     networks:

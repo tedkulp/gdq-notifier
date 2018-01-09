@@ -1,6 +1,12 @@
 const CronJob = require('cron').CronJob;
 const fs = require('fs');
 
+const express = require('express');
+const cors = require('cors');
+const app = express();
+
+app.use(cors());
+
 const _ = require('lodash');
 const Promise = require('bluebird');
 const request = require('request');
@@ -11,8 +17,10 @@ const client = redis.createClient({
     port: process.env.DOCKER_REDIS_PORT,
 });
 
+const api = require('./src/api')
 const scraper = require('./src/scraper');
 const notifier = require('./src/notifier');
+const userId = '1';
 
 let isList = false;
 for (let j = 0; j < process.argv.length; j++) {  
@@ -52,10 +60,34 @@ if (isList) {
         cronTime: '0 * * * * *',
         onTick: () => {
             // TODO: 1 is the user id.  Change me for multiple users.
-            notifier.checkForNotifications(parsedData, client, '1');
+            notifier.checkForNotifications(parsedData, client, userId);
         },
         start: true,
     });
+
+    app.get('/api/gamelist', (req, res) => {
+        res.json(parsedData);
+    });
+
+    app.get('/api/watchedgames', (req, res) => {
+        return api.listWatchedGames(client, userId).then(resp => {
+            res.json(resp);
+        });
+    });
+
+    app.post('/api/watchedgames/:gameId', (req, res) => {
+        api.addWatchedGame(client, req.params.gameId, userId).then(resp => {
+            res.json(resp);
+        });
+    });
+
+    app.delete('/api/watchedgames/:gameId', (req, res) => {
+        api.removeWatchedGame(client, req.params.gameId, userId).then(resp => {
+            res.json(resp);
+        });
+    });
+
+    app.listen(3002, () => console.log('Example app listening on port 3002!'))
 
     callScraper();
 }

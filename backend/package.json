@@ -1,0 +1,26 @@
+{
+  "name": "gdq-notifier",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Ted Kulp <ted@tedkulp.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "cheerio": "^1.0.0-rc.2",
+    "cors": "^2.8.4",
+    "cron": "^1.3.0",
+    "express": "^4.16.2",
+    "lodash": "^4.17.4",
+    "moment": "^2.20.1",
+    "pushbullet": "^2.1.0",
+    "redis": "^2.8.0",
+    "request": "^2.83.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^4.1.0"
+  }
+}
