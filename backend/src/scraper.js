@@ -1,7 +1,7 @@
 const cheerio = require('cheerio');
 var crypto = require('crypto');
 
-const CURRENT_EVENT = 'AGDQ 2018';
+const CURRENT_EVENT = 'AGDQ 2019';
 
 const generateId = game => {
     const shasum = crypto.createHash('sha1');
@@ -12,7 +12,7 @@ const generateId = game => {
 const parseSchedule = html => {
     const $ = cheerio.load(html);
     let games = [];
-    
+
     let currentGame = undefined;
     let skipRow = false;
     $('tbody').find('tr').each((idx, elem) => {

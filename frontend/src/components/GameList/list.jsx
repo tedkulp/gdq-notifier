@@ -33,8 +33,10 @@ class List extends React.Component {
                     <tr>
                         <th></th>
                         <th>Title</th>
+                        <th>Category</th>
                         <th>Runners</th>
                         <th>Start Time</th>
+                        <th>Run Time</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -52,8 +54,10 @@ class List extends React.Component {
                                     }
                                 </td>
                                 <td>{game.title}</td>
+                                <td>{game.category}</td>
                                 <td>{game.runners}</td>
                                 <td>{moment(game.startTime).format('YYYY-MM-DD, hh:mm a')}</td>
+                                <td>{game.runTime}</td>
                             </tr>
                         );
                     })
