@@ -23,7 +23,7 @@ const notifier = require('./src/notifier');
 const userId = '1';
 
 let isList = false;
-for (let j = 0; j < process.argv.length; j++) {  
+for (let j = 0; j < process.argv.length; j++) {
     if (process.argv[j] === "--list") {
         isList = true;
     }
@@ -49,13 +49,13 @@ if (isList) {
     });
 } else {
     const scraperJob = new CronJob({
-        cronTime: '0 */10 * * * *',
+        cronTime: '0 */5 * * * *',
         onTick: () => {
             callScraper();
         },
         start: true,
     });
-    
+
     const notifierJob = new CronJob({
         cronTime: '0 * * * * *',
         onTick: () => {

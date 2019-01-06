@@ -15,6 +15,7 @@
     "express": "^4.16.2",
     "lodash": "^4.17.4",
     "moment": "^2.20.1",
+    "moment-timezone": "^0.5.23",
     "pushbullet": "^2.1.0",
     "redis": "^2.8.0",
     "request": "^2.83.0"

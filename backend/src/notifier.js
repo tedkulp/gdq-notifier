@@ -1,7 +1,7 @@
 const _ = require('lodash');
 const fs = require('fs');
 const os = require('os');
-const moment = require('moment');
+const moment = require('moment-timezone');
 const Promise = require('bluebird');
 const PushBullet = require('pushbullet');
 const pusher = new PushBullet(process.env.PUSHBULLET_API_KEY);
@@ -30,7 +30,7 @@ const checkForNotifications = (parsedData, redis, userId) => {
         _.forEach(foundGames, game => {
             checkIfNotificationSent(redis, userId, game.id).then(wasNotified => {
                 if (!wasNotified && moment(game.startTime).isSameOrBefore(checkTime)) {
-                    pusher.note({}, `${game.event} Notification`, `${game.title} by ${game.runners} is going to start at ${moment(game.startTime).format('h:mm a')}.`);
+                    pusher.note({}, `${game.event} - ${game.title}`, `${game.title} by ${game.runners} is going to start at ${moment(game.startTime).tz(process.env.TIMEZONE || 'America/New_York').format('h:mm a')}.`);
                     setNotificationAsSent(redis, userId, game.id);
                 }
             });
