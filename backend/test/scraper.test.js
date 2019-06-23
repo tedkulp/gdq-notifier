@@ -1,6 +1,6 @@
 const expect = require('chai').expect;
 const fs = require('fs');
-const cheerio = require('cheerio')
+const cheerio = require('cheerio');
 
 const scraper = require('../src/scraper.js');
 
@@ -12,29 +12,29 @@ describe('Scraper', () => {
     });
 
     describe('parseSchedule', () => {
-        it ('gets the first game correctly as Crash Bandicoot', () => {
+        it ('gets the first game correctly', () => {
             const parsedData = scraper.parseSchedule(htmlData);
             expect(parsedData).to.not.be.empty;
             const firstGame = parsedData[0];
-            expect(firstGame.id).to.equal('4a9e2013c349e74f7528455a189eb5433b9967b9');
-            expect(firstGame.title).to.equal('Crash Bandicoot N. Sane Trilogy');
-            expect(firstGame.startTime).to.equal('2018-01-07T17:00:00Z');
-            expect(firstGame.runners).to.equal('JHobz');
+            expect(firstGame.id).to.equal('a91876480f5b2bcf596401c8fc15358f556e2aa5');
+            expect(firstGame.title).to.equal('Spyro Reignited Trilogy: Spyro the Dragon');
+            expect(firstGame.startTime).to.equal('2019-06-23T17:00:00Z');
+            expect(firstGame.runners).to.equal('ChrisLBC');
             expect(firstGame.setupTime).to.equal('0:10:00');
-            expect(firstGame.runTime).to.equal('1:13:00');
-            expect(firstGame.category).to.equal('Crash Bandicoot 3: Warped - Any%');
+            expect(firstGame.runTime).to.equal('1:00:00');
+            expect(firstGame.category).to.equal('Any% — PS4');
         });
-    
-        it ('get the last game correctly as The Legend of Zelda: BOTW', () => {
+
+        it ('get the last game correctly', () => {
             const parsedData = scraper.parseSchedule(htmlData);
             const lastGame = parsedData[parsedData.length - 1];
-            expect(lastGame.id).to.equal('3068e7bc7f11224098b676c294e65505e5e63f4e');
-            expect(lastGame.title).to.equal('The Legend of Zelda: Breath of the Wild');
-            expect(lastGame.startTime).to.equal('2018-01-14T04:14:00Z');
-            expect(lastGame.runners).to.equal('atz');
+            expect(lastGame.id).to.equal('0275397b4868409af6121651467b2f3fa63d3742');
+            expect(lastGame.title).to.equal('Chrono Trigger');
+            expect(lastGame.startTime).to.equal('2019-06-29T22:52:00Z');
+            expect(lastGame.runners).to.equal('puwexil');
             expect(lastGame.setupTime).to.equal('0:10:00');
-            expect(lastGame.runTime).to.equal('3:57:00');
-            expect(lastGame.category).to.equal('All Main Quests (No Amiibo)');
+            expect(lastGame.runTime).to.equal('6:00:00');
+            expect(lastGame.category).to.equal('Glitchless Any% — SNES');
         });
     });
 

@@ -5,7 +5,8 @@
   "author": "Ted Kulp <ted@tedkulp.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "node_modules/.bin/mocha test/scraper.test.js"
   },
   "dependencies": {
     "bluebird": "^3.5.1",

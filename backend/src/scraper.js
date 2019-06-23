@@ -1,7 +1,7 @@
 const cheerio = require('cheerio');
 var crypto = require('crypto');
 
-const CURRENT_EVENT = 'AGDQ 2019';
+const CURRENT_EVENT = 'SGDQ 2019';
 
 const generateId = game => {
     const shasum = crypto.createHash('sha1');
