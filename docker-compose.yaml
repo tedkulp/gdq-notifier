@@ -11,6 +11,11 @@ services:
     environment:
       DOCKER_REDIS_HOST: "redis"
       PUSHBULLET_API_KEY: "${PUSHBULLET_API_KEY}"
+      EMAIL_ADDRESS: "${SMS_EMAIL_ADDRESS}"
+      EMAIL_SERVER: "${SMS_EMAIL_SERVER}"
+      EMAIL_PORT: "${SMS_EMAIL_PORT}"
+      EMAIL_USERNAME: "${SMS_EMAIL_USERNAME}"
+      EMAIL_PASSWORD: "${SMS_EMAIL_PASSWORD}"
     # volumes:
     #   - .:/myapp
     depends_on:
