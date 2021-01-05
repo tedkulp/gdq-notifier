@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "axios": "^0.18.1",
+    "axios": "^0.21.1",
     "bluebird": "^3.5.1",
     "bootstrap": "4.0.0-beta.3",
     "final-form": "^3.0.0",
